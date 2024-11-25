@@ -1,0 +1,16 @@
+galaxy_info:
+  author: Kevin Harvey
+  description: Standard configuration tasks for my lab servers.
+ 
+  license: GPLv3
+
+  min_ansible_version: "2.1"
+
+  platforms:
+    - name: EL
+      versions:
+      - "9"
+ 
+  galaxy_tags: []
+
+dependencies: []

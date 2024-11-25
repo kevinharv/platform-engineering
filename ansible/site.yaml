@@ -1,0 +1,8 @@
+---
+- name: Configure AWS VPN
+  hosts: awspnvpn1
+  become: true
+
+  roles:
+    - common
+    - wireguard

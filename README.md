@@ -12,3 +12,15 @@ The objective of this lab is to construct a self-service platform that enables d
 1. Build out Ansible AWX
 1. Build basic automation workflows
 1. Build self-service platform
+
+## Notes
+### Documentation Conventions
+
+**Hostnames**
+[location][environment][tier][app][identifier]
+
+Ex: awspnvpn1 (AWS Production Network VPN 1)
+
+**Tagging**
+- Follow AWS naming conventions for AWS resources
+- Create and implement custom tagging standards

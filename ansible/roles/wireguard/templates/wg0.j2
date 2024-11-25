@@ -1,0 +1,17 @@
+[Interface]
+PrivateKey = {{ wg_server_private_key }}
+Address = {{ wg_address_cidr }}
+ListenPort = {{ wg_listen_port }}
+SaveConfig = true
+
+# PostUp = firewall-cmd --zone=public --add-masquerade
+# PostUp = firewall-cmd --direct --add-rule ipv4 filter FORWARD 0 -i wg -o {{ public_nic_name }} -j ACCEPT
+# PostUp = firewall-cmd --direct --add-rule ipv4 nat POSTROUTING 0 -o {{ public_nic_name }} -j MASQUERADE
+
+# PostDown = firewall-cmd --zone=public --remove-masquerade
+# PostDown = firewall-cmd --direct --remove-rule ipv4 filter FORWARD 0 -i wg -o {{ public_nic_name }} -j ACCEPT
+# PostDown = firewall-cmd --direct --remove-rule ipv4 nat POSTROUTING 0 -o {{ public_nic_name }} -j MASQUERADE
+
+[Peer]
+PublicKey = {{ wg_client_public_key }}
+AllowedIPs = {{ wg_clients_cidr }}
