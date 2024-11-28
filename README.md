@@ -14,6 +14,10 @@ The objective of this lab is to construct a self-service platform that enables d
 1. Build self-service platform
 
 ## Notes
+### Scratch
+- Have to create jump box to use Packer because WSL causes network issues
+
+
 ### Documentation Conventions
 
 **Hostnames**
