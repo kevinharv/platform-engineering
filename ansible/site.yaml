@@ -1,4 +1,30 @@
 ---
+- name: Provision AWS Infrastructure
+  hosts: localhost
+  become: false
+
+  tasks:
+    - name: Provision AWS Resources
+      community.general.terraform:
+        project_path: ../aws
+        state: present
+
+    - name: Register Terraform Outputs
+      ansible.builtin.command:
+        cmd: terraform output -json
+        chdir: ../aws
+      register: terraform_outputs
+
+    - name: Import Facts from Terraform
+      ansible.builtin.set_fact:
+        tf_outputs: "{{ terraform_outputs.stdout | from_json }}"
+
+    # We shouldn't need these if we setup DNS correctly - only IPs/networking would ever change
+    - name: DEBUG - Print Terraform Outputs
+      ansible.builtin.debug:
+        msg: "Terraform Facts: {{ tf_outputs }}"
+
+
 - name: Configure AWS VPN
   hosts: awspnvpn1
   become: true
