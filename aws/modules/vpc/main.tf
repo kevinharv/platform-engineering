@@ -18,11 +18,11 @@ resource "aws_internet_gateway" "igw" {
 
 # Public Subnets
 resource "aws_subnet" "public" {
-  count = length(var.public_subnet_cidrs)
-  vpc_id            = aws_vpc.main.id
-  cidr_block        = var.public_subnet_cidrs[count.index]
+  count                   = length(var.public_subnet_cidrs)
+  vpc_id                  = aws_vpc.main.id
+  cidr_block              = var.public_subnet_cidrs[count.index]
   map_public_ip_on_launch = true
-  availability_zone = element(var.availability_zones, count.index % length(var.availability_zones))
+  availability_zone       = element(var.availability_zones, count.index % length(var.availability_zones))
   tags = {
     Name = "${var.vpc_name}-public-${count.index}"
   }
@@ -30,7 +30,7 @@ resource "aws_subnet" "public" {
 
 # Private Subnets
 resource "aws_subnet" "private" {
-  count = length(var.private_subnet_cidrs)
+  count             = length(var.private_subnet_cidrs)
   vpc_id            = aws_vpc.main.id
   cidr_block        = var.private_subnet_cidrs[count.index]
   availability_zone = element(var.availability_zones, count.index % length(var.availability_zones))
@@ -61,15 +61,21 @@ resource "aws_route" "public_internet_access" {
   gateway_id             = aws_internet_gateway.igw.id
 }
 
-# Security Group for SSH Access
-resource "aws_security_group" "ssh" {
-  vpc_id = aws_vpc.main.id
-  name   = "${var.vpc_name}-ssh"
-  description = "Allow SSH access"
+# Security Group for WG + SSH Access
+resource "aws_security_group" "wg_ssh_sg" {
+  vpc_id      = aws_vpc.main.id
+  name        = "${var.vpc_name}-remote-access"
+  description = "Allow WG + SSH access"
   ingress {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
+    cidr_blocks = var.ssh_allowed_ips
+  }
+  ingress {
+    from_port   = 51820
+    to_port     = 51820
+    protocol    = "udp"
     cidr_blocks = var.ssh_allowed_ips
   }
   egress {
@@ -79,6 +85,6 @@ resource "aws_security_group" "ssh" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   tags = {
-    Name = "${var.vpc_name}-ssh"
+    Name = "${var.vpc_name}-remote-access"
   }
 }

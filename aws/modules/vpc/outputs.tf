@@ -15,5 +15,5 @@ output "private_subnet_ids" {
 
 output "security_group_id" {
   description = "The ID of the SSH security group"
-  value       = aws_security_group.ssh.id
+  value       = aws_security_group.wg_ssh_sg.id
 }
