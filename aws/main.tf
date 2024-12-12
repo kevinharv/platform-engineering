@@ -82,6 +82,10 @@ resource "aws_instance" "awspnvpn1" {
   ami = data.aws_ami.amzn-linux-2023-ami.id
   key_name = "LabKeypair"
 
+  tags = {
+    "Name" = "awspnvpn1.aws.kevharv.com"
+  }
+
   associate_public_ip_address = true
   subnet_id = module.lab_vpc.public_subnet_ids[0]
   vpc_security_group_ids = ["${module.lab_vpc.security_group_id}"]
