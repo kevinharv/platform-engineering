@@ -6,13 +6,13 @@
   tasks:
     - name: Provision AWS Resources
       community.general.terraform:
-        project_path: ../aws
+        project_path: ./terraform/aws
         state: present
 
     - name: Register Terraform Outputs
       ansible.builtin.command:
         cmd: terraform output -json
-        chdir: ../aws
+        chdir: ./terraform/aws
       register: terraform_outputs
 
     - name: Import Facts from Terraform
