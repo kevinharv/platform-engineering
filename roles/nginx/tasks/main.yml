@@ -1,0 +1,9 @@
+---
+# Install NGINX >=1.26.0
+# Install certbot for LE ACME (unless certs provided)
+# Generate QUIC host key (if not exists)
+# Install nginx.conf
+# Install server.conf in /etc/nginx/conf.d/
+# Acquire certificate (if not exists)
+# Restart NGINX (if certificate created/updated)
+# Setup CRON job for certs + NGINX restart

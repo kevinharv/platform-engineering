@@ -112,9 +112,6 @@ resource "aws_route53_record" "awspnvpn1_dns" {
   depends_on = [ aws_instance.awspnvpn1 ]
 }
 
-# To-Do - Allow WireGuard access to public subnet (51820/udp)
-
-
 # =============== Output Definitions ===============
 
 output "ec2_ip" {
