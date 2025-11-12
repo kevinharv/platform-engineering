@@ -45,7 +45,7 @@ export const BasicInfoSection: FC = () => {
       >
         <FormControl
           sx={{
-            width: "58%",
+            minWidth: "40%",
           }}
         >
           <Autocomplete
@@ -62,7 +62,7 @@ export const BasicInfoSection: FC = () => {
 
         <FormControl
           sx={{
-            width: "40%",
+            minWidth: "40%",
             ml: 2,
           }}
         >

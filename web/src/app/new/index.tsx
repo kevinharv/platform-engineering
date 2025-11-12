@@ -6,6 +6,14 @@ export const Route = createFileRoute("/new/")({
   component: NewPage,
 });
 
+/*
+  TODO
+  - LB config
+  - DNS resources
+  - PKI/TLS resources
+  - Firewall rules
+*/
+
 function NewPage() {
   return (
     <Grid

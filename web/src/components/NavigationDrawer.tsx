@@ -11,22 +11,10 @@ import {
 } from "@mui/material";
 import {
   DashboardOutlined,
-  SettingsOutlined,
-  PersonOutlined,
-  BuildOutlined,
-  InfoOutline,
-  ListAltOutlined,
-  GroupsOutlined,
   AddOutlined,
   AttachMoneyOutlined,
-  CodeOutlined,
-  ListOutlined,
-  ComputerOutlined,
-  CheckOutlined,
-  DesktopWindowsOutlined,
   AppsOutlined,
   ConstructionOutlined,
-  FeedOutlined,
   LanOutlined,
   CheckCircleOutline,
 } from "@mui/icons-material";

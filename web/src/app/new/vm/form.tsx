@@ -49,29 +49,29 @@ function NewVMContent() {
           marginRight: 2,
         }}
       >
-        {currentStep === 0 &&
+        {currentStep === 0 && (
           <Box>
             <BasicInfoSection />
             <OSSection />
             <Placement />
             <ResourceDetailsSection />
           </Box>
-        }
-        {currentStep === 1 &&
-        <Box>
-          <p>Tags set here</p>
-        </Box>
-        }
-        {currentStep === 2 &&
-        <Box>
-          <ul>
-            <li>DNS record(s)</li>
-            <li>Load balancer config</li>
-            <li>Firewall rules?</li>
-            <li>Credential management?</li>
-          </ul>
-        </Box>
-        }
+        )}
+        {currentStep === 1 && (
+          <Box>
+            <p>Tags set here</p>
+          </Box>
+        )}
+        {currentStep === 2 && (
+          <Box>
+            <ul>
+              <li>DNS record(s)</li>
+              <li>Load balancer config</li>
+              <li>Firewall rules?</li>
+              <li>Credential management?</li>
+            </ul>
+          </Box>
+        )}
         <StepNavigation
           onNext={handleNext}
           onBack={handleBack}
@@ -92,10 +92,56 @@ function NewVMContent() {
   );
 }
 
+function Content() {
+  const { currentStep, setStep } = useVMRequest();
+  
+  const handleNext = () => {
+    setStep(currentStep + 1);
+  };
+  
+  const handleBack = () => {
+    setStep(currentStep - 1);
+  };
+
+  return (
+      <Grid container sx={{
+        spacing: 2,
+        width: "100%",
+        height: "100%"
+      }}>
+        <Grid size={12}>
+          <Stepper
+            activeStep={currentStep}
+            alternativeLabel
+            sx={{
+              marginY: 4,
+            }}
+          >
+            {steps.map((label) => (
+              <Step key={label}>
+                <StepLabel>{label}</StepLabel>
+              </Step>
+            ))}
+          </Stepper>
+        <Divider />
+        </Grid>
+
+        <Grid size={9}>
+            <BasicInfoSection />
+        </Grid>
+
+        <Grid size={3}>
+            <Receipt />
+        </Grid>
+      </Grid>
+  );
+}
+
 function NewVM() {
+
   return (
     <VMRequestProvider>
-      <NewVMContent />
+      <Content />
     </VMRequestProvider>
   );
 }
