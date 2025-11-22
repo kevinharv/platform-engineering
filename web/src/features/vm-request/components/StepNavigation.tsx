@@ -22,7 +22,7 @@ export const StepNavigation: FC<StepNavigationProps> = ({
           Back
         </Button>
       )}
-      <Button variant="contained" onClick={onNext}>
+      <Button variant="contained" onClick={onNext} size='large'>
         {isLastStep ? 'Submit' : 'Next'}
       </Button>
     </Box>

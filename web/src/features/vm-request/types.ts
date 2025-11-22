@@ -1,4 +1,4 @@
-export type Environment = 'dev' | 'qa' | 'prod';
+export type Environment = 'sandbox' | 'dev' | 'qa' | 'prod';
 export type NetworkZone = 'public' | 'private' | 'data' | 'pci';
 export type DataCenter = 'dc1' | 'dc2' | 'dc3';
 export type OSFamily = 'linux' | 'windows';

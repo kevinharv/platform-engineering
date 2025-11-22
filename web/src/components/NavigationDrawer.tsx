@@ -27,7 +27,7 @@ const initials =
   loggedInUser.displayName.split(" ")[0][0] +
   loggedInUser.displayName.split(" ")[1][0];
 
-const drawerWidth = 240;
+const drawerWidth = 220;
 const navEntries = [
   {
     icon: <DashboardOutlined />,
@@ -68,16 +68,20 @@ const navEntries = [
 
 export default function NavigationDrawer({ children }: { children: any }) {
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex", minHeight: '100vh' }}>
       <Drawer
         variant="permanent"
         sx={{
           width: drawerWidth,
           flexShrink: 1,
+          display: { xs: 'none', md: 'block' },
           [`& .MuiDrawer-paper`]: {
-            width: drawerWidth,
-            boxSizing: "border-box",
-          },
+              width: drawerWidth,
+              boxSizing: "border-box",
+              position: 'relative',
+              height: '100vh',
+              top: 0
+            },
         }}
       >
         <Box sx={{ display: "flex", flexDirection: "column", height: "100%" }}>
