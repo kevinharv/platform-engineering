@@ -38,9 +38,7 @@ export const OSSection: FC = () => {
   };
 
   return (
-    <Grid container spacing={3} sx={{
-        marginTop: 4
-    }}>
+    <Grid container spacing={3}>
       <Grid size={5}>
         <Box>
           <ButtonGroup variant="outlined" fullWidth size="large">

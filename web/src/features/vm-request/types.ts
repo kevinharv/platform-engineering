@@ -1,6 +1,6 @@
 export type Environment = 'sandbox' | 'dev' | 'qa' | 'prod';
 export type NetworkZone = 'public' | 'private' | 'data' | 'pci';
-export type DataCenter = 'dc1' | 'dc2' | 'dc3';
+export type DataCenter = 'da1' | 'da2' | 'ch3' | 'va7' | 'auto';
 export type OSFamily = 'linux' | 'windows';
 export type Tier = 'ui' | 'api' | 'control-plane' | 'execution-plane' | 'db' | 'other';
 export type PatchingDay = 'su' | 'mo' | 'tu' | 'we' | 'th' | 'fr' | 'sa';
@@ -34,7 +34,7 @@ export const INITIAL_FORM_DATA: VMRequestFormData = {
   hostname: '',
   environment: 'dev',
   networkZone: 'private',
-  dataCenter: 'dc1',
+  dataCenter: 'da1',
   osFamily: 'linux',
   osVersion: 'rhel-9',
   tier: 'ui',

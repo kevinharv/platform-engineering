@@ -5,9 +5,18 @@ import NetworkZone from "@/features/vm-request/components/NetworkZone";
 import { OSSection } from "@/features/vm-request/components/OSSection";
 import { Placement } from "@/features/vm-request/components/Placement";
 import { ResourceDetailsSection } from "@/features/vm-request/components/ResourceDetailsSection";
-import { StepNavigation } from "@/features/vm-request/components/StepNavigation";
-import { Grid, Stepper, Step, StepLabel, Divider } from "@mui/material";
+import { ServerTier } from "@/features/vm-request/components/ServerTier";
+import {
+  Grid,
+  Stepper,
+  Step,
+  StepLabel,
+  Divider,
+  Box,
+  Button,
+} from "@mui/material";
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
 
 export const Route = createFileRoute("/new/vm/")({
   component: NewVM,
@@ -15,12 +24,13 @@ export const Route = createFileRoute("/new/vm/")({
 
 function NewVM() {
   const vmSteps = ["Metadata", "Tags", "Add-Ons", "Review"];
+  const [step, setStep] = useState(0);
 
   return (
     <Grid container spacing={2} sx={{ marginLeft: 0 }}>
       {/* FORM STEPS */}
       <Grid size={12}>
-        <Stepper activeStep={0} alternativeLabel>
+        <Stepper activeStep={step} alternativeLabel>
           {vmSteps.map((label) => (
             <Step key={label}>
               <StepLabel>{label}</StepLabel>
@@ -31,38 +41,82 @@ function NewVM() {
         <Divider sx={{ marginY: 2 }} />
       </Grid>
 
-      {/* Metadata form fields */}
-      <Grid size={6}>
-        <ApplicationSelector />
+      {/* METADATA FORM FIELDS */}
+      <Grid container size={8}>
+        <Grid size={6}>
+          <ApplicationSelector />
+        </Grid>
+
+        <Grid size={3}>
+          <CustomIDField />
+        </Grid>
+
+        <Grid size={3}>
+          <ServerTier />
+        </Grid>
+
+        <Grid size={6}>
+          <Environment />
+        </Grid>
+
+        <Grid size={6}>
+          <NetworkZone />
+        </Grid>
+
+        <Grid size={12}>
+          <Divider sx={{ marginY: 2 }} />
+          <OSSection />
+          <Divider sx={{ marginY: 2 }} />
+          <Placement />
+          <Divider sx={{ marginY: 2 }} />
+          <ResourceDetailsSection />
+
+          {/* Form navigation buttons */}
+          <Box
+            sx={{ display: "flex", justifyContent: "flex-end", mt: 4, gap: 2 }}
+          >
+            {step > 0 && (
+              <Button variant="outlined" onClick={() => setStep(step - 1)}>
+                Back
+              </Button>
+            )}
+            {step < vmSteps.length - 1 && (
+              <Button
+                variant="contained"
+                onClick={() => setStep(step + 1)}
+                size="large"
+              >
+                Next
+              </Button>
+            )}
+            {step == vmSteps.length - 1 && (
+              <Button
+                variant="contained"
+                onClick={() => alert("Submitted!")}
+                size="large"
+              >
+                Submit
+              </Button>
+            )}
+          </Box>
+        </Grid>
       </Grid>
 
-      <Grid size={3}>
-        <CustomIDField />
-      </Grid>
+      {/* TAGS FORM FIELDS */}
 
-      <Grid size={3}>
-        <h1>Placeholder</h1>
-      </Grid>
+      {/* ADD-ONS FORM FIELDS */}
 
-      <Grid size={5}>
-        <Environment />
-      </Grid>
+      {/* REVIEW VIEW */}
 
-      <Grid size={4}>
-        <NetworkZone />
-      </Grid>
-
-      <Grid size={9}>
-        <Divider sx={{ marginY: 2 }} />
-        <OSSection />
-        <Divider sx={{ marginY: 2 }} />
-        <Placement />
-        <Divider sx={{ marginY: 2 }} />
-        <ResourceDetailsSection />
-        <StepNavigation />
-      </Grid>
-
-      {/* TODO - add remaining fields; add steps logic */}
+      {/* RECEIPT SECTION */}
+      {step < vmSteps.length - 1 && (
+        <Grid size={4}>
+          <h1>Placeholder</h1>
+          <h1>Placeholder</h1>
+          <h1>Placeholder</h1>
+          <h1>Placeholder</h1>
+        </Grid>
+      )}
     </Grid>
   );
 }
