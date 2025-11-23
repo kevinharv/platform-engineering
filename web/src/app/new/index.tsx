@@ -1,4 +1,4 @@
-import { ComputerOutlined, CodeOutlined } from "@mui/icons-material";
+import { CodeOutlined, StorageOutlined } from "@mui/icons-material";
 import { Button, Grid } from "@mui/material";
 import { createFileRoute, Link } from "@tanstack/react-router";
 
@@ -27,7 +27,7 @@ function NewPage() {
       }}
     >
       <Grid>
-        <Link to="/new/vm/form" style={{ textDecoration: "none" }}>
+        <Link to="/new/vm" style={{ textDecoration: "none" }}>
           <Button
             variant="outlined"
             sx={{
@@ -36,7 +36,7 @@ function NewPage() {
               fontWeight: "bold",
               minWidth: 300,
             }}
-            startIcon={<ComputerOutlined />}
+            startIcon={<StorageOutlined />}
           >
             Virtual Machine
           </Button>

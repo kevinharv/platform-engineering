@@ -7,10 +7,10 @@ export default function ApplicationSelector() {
 
   const applicationList = [
     "Sailpoint IIQ",
-    "Active Directory Directory Services",
+    "Active Directory Domain Services",
     "Active Directory Entra ID Connect",
     "Ansible Automation Platform",
-    "Red Hat Satellite"
+    "Satellite"
   ];
 
   return (

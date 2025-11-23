@@ -4,6 +4,7 @@ import Environment from "@/features/vm-request/components/Environment";
 import NetworkZone from "@/features/vm-request/components/NetworkZone";
 import { OSSection } from "@/features/vm-request/components/OSSection";
 import { Placement } from "@/features/vm-request/components/Placement";
+import { Receipt } from "@/features/vm-request/components/Receipt";
 import { ResourceDetailsSection } from "@/features/vm-request/components/ResourceDetailsSection";
 import { ServerTier } from "@/features/vm-request/components/ServerTier";
 import {
@@ -42,7 +43,7 @@ function NewVM() {
       </Grid>
 
       {/* METADATA FORM FIELDS */}
-      <Grid container size={8}>
+      <Grid container size={9}>
         <Grid size={6}>
           <ApplicationSelector />
         </Grid>
@@ -110,11 +111,8 @@ function NewVM() {
 
       {/* RECEIPT SECTION */}
       {step < vmSteps.length - 1 && (
-        <Grid size={4}>
-          <h1>Placeholder</h1>
-          <h1>Placeholder</h1>
-          <h1>Placeholder</h1>
-          <h1>Placeholder</h1>
+        <Grid size={3}>
+          <Receipt />
         </Grid>
       )}
     </Grid>

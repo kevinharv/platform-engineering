@@ -14,7 +14,6 @@ import { Route as IndexRouteImport } from "./app/index"
 import { Route as NewIndexRouteImport } from "./app/new/index"
 import { Route as NewNamespaceRouteImport } from "./app/new/namespace"
 import { Route as NewVmIndexRouteImport } from "./app/new/vm/index"
-import { Route as NewVmFormRouteImport } from "./app/new/vm/form"
 
 const AboutRoute = AboutRouteImport.update({
   id: "/about",
@@ -41,18 +40,12 @@ const NewVmIndexRoute = NewVmIndexRouteImport.update({
   path: "/new/vm/",
   getParentRoute: () => rootRouteImport,
 } as any)
-const NewVmFormRoute = NewVmFormRouteImport.update({
-  id: "/new/vm/form",
-  path: "/new/vm/form",
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   "/": typeof IndexRoute
   "/about": typeof AboutRoute
   "/new/namespace": typeof NewNamespaceRoute
   "/new": typeof NewIndexRoute
-  "/new/vm/form": typeof NewVmFormRoute
   "/new/vm": typeof NewVmIndexRoute
 }
 export interface FileRoutesByTo {
@@ -60,7 +53,6 @@ export interface FileRoutesByTo {
   "/about": typeof AboutRoute
   "/new/namespace": typeof NewNamespaceRoute
   "/new": typeof NewIndexRoute
-  "/new/vm/form": typeof NewVmFormRoute
   "/new/vm": typeof NewVmIndexRoute
 }
 export interface FileRoutesById {
@@ -69,28 +61,14 @@ export interface FileRoutesById {
   "/about": typeof AboutRoute
   "/new/namespace": typeof NewNamespaceRoute
   "/new/": typeof NewIndexRoute
-  "/new/vm/form": typeof NewVmFormRoute
   "/new/vm/": typeof NewVmIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | "/"
-    | "/about"
-    | "/new/namespace"
-    | "/new"
-    | "/new/vm/form"
-    | "/new/vm"
+  fullPaths: "/" | "/about" | "/new/namespace" | "/new" | "/new/vm"
   fileRoutesByTo: FileRoutesByTo
-  to: "/" | "/about" | "/new/namespace" | "/new" | "/new/vm/form" | "/new/vm"
-  id:
-    | "__root__"
-    | "/"
-    | "/about"
-    | "/new/namespace"
-    | "/new/"
-    | "/new/vm/form"
-    | "/new/vm/"
+  to: "/" | "/about" | "/new/namespace" | "/new" | "/new/vm"
+  id: "__root__" | "/" | "/about" | "/new/namespace" | "/new/" | "/new/vm/"
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -98,7 +76,6 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   NewNamespaceRoute: typeof NewNamespaceRoute
   NewIndexRoute: typeof NewIndexRoute
-  NewVmFormRoute: typeof NewVmFormRoute
   NewVmIndexRoute: typeof NewVmIndexRoute
 }
 
@@ -139,13 +116,6 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof NewVmIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    "/new/vm/form": {
-      id: "/new/vm/form"
-      path: "/new/vm/form"
-      fullPath: "/new/vm/form"
-      preLoaderRoute: typeof NewVmFormRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
@@ -154,7 +124,6 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   NewNamespaceRoute: NewNamespaceRoute,
   NewIndexRoute: NewIndexRoute,
-  NewVmFormRoute: NewVmFormRoute,
   NewVmIndexRoute: NewVmIndexRoute,
 }
 export const routeTree = rootRouteImport
