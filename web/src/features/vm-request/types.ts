@@ -26,6 +26,7 @@ export interface VMRequestFormData {
   costCenter: string;
   quantity: number;
   tags: Tag[];
+  monthlyCost: number;
 }
 
 export const INITIAL_FORM_DATA: VMRequestFormData = {
@@ -42,5 +43,6 @@ export const INITIAL_FORM_DATA: VMRequestFormData = {
   patchingWindow: '0100-0400',
   costCenter: '',
   quantity: 1,
-  tags: [{ key: '', value: '' }]
+  tags: [{ key: '', value: '' }],
+  monthlyCost: 0
 };
