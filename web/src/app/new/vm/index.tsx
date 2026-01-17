@@ -7,6 +7,7 @@ import { Placement } from "@/features/vm-request/components/Placement";
 import { Receipt } from "@/features/vm-request/components/Receipt";
 import { ResourceDetailsSection } from "@/features/vm-request/components/ResourceDetailsSection";
 import { ServerTier } from "@/features/vm-request/components/ServerTier";
+import { TagsSection } from "@/features/vm-request/components/TagsSection";
 import {
   Grid,
   Stepper,
@@ -42,72 +43,97 @@ function NewVM() {
         <Divider sx={{ marginY: 2 }} />
       </Grid>
 
-      {/* METADATA FORM FIELDS */}
       <Grid container size={9}>
-        <Grid size={6}>
-          <ApplicationSelector />
-        </Grid>
+        {/* METADATA FORM FIELDS */}
+        {step == 0 && (
+          <>
+            <Grid size={6}>
+              <ApplicationSelector />
+            </Grid>
 
-        <Grid size={3}>
-          <CustomIDField />
-        </Grid>
+            <Grid size={3}>
+              <CustomIDField />
+            </Grid>
 
-        <Grid size={3}>
-          <ServerTier />
-        </Grid>
+            <Grid size={3}>
+              <ServerTier />
+            </Grid>
 
-        <Grid size={6}>
-          <Environment />
-        </Grid>
+            <Grid size={6}>
+              <Environment />
+            </Grid>
 
-        <Grid size={6}>
-          <NetworkZone />
-        </Grid>
+            <Grid size={6}>
+              <NetworkZone />
+            </Grid>
 
-        <Grid size={12}>
-          <Divider sx={{ marginY: 2 }} />
-          <OSSection />
-          <Divider sx={{ marginY: 2 }} />
-          <Placement />
-          <Divider sx={{ marginY: 2 }} />
-          <ResourceDetailsSection />
+            <Grid size={12}>
+              <Divider sx={{ marginY: 2 }} />
+              <OSSection />
+              <Divider sx={{ marginY: 2 }} />
+              <Placement />
+              <Divider sx={{ marginY: 2 }} />
+              <ResourceDetailsSection />
+            </Grid>
+          </>
+        )}
 
-          {/* Form navigation buttons */}
-          <Box
-            sx={{ display: "flex", justifyContent: "flex-end", mt: 4, gap: 2 }}
-          >
-            {step > 0 && (
-              <Button variant="outlined" onClick={() => setStep(step - 1)}>
-                Back
-              </Button>
-            )}
-            {step < vmSteps.length - 1 && (
-              <Button
-                variant="contained"
-                onClick={() => setStep(step + 1)}
-                size="large"
-              >
-                Next
-              </Button>
-            )}
-            {step == vmSteps.length - 1 && (
-              <Button
-                variant="contained"
-                onClick={() => alert("Submitted!")}
-                size="large"
-              >
-                Submit
-              </Button>
-            )}
-          </Box>
-        </Grid>
+        {/* TAGS FORM FIELDS */}
+        {step == 1 && (
+          <>
+            <Grid size={12}>
+              <TagsSection />
+            </Grid>
+          </>
+        )}
+
+        {/* ADD-ONS FORM FIELDS */}
+        {step == 2 && (
+          <>
+            <Grid size={12}>
+              <TagsSection />
+            </Grid>
+          </>
+        )}
+
+        {/* REVIEW PAGE */}
+
+        {/* Form navigation buttons */}
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "flex-end",
+            width: "100%",
+            height: "8%",
+            mt: 4,
+            gap: 2,
+          }}
+        >
+          {step > 0 && (
+            <Button variant="outlined" onClick={() => setStep(step - 1)}>
+              Back
+            </Button>
+          )}
+          {step < vmSteps.length - 1 && (
+            <Button
+              variant="contained"
+              onClick={() => setStep(step + 1)}
+              size="large"
+            >
+              Next
+            </Button>
+          )}
+          {step == vmSteps.length - 1 && (
+            <Button
+              variant="contained"
+              onClick={() => alert("Submitted!")}
+              size="large"
+            >
+              Submit
+            </Button>
+          )}
+        </Box>
       </Grid>
-
-      {/* TAGS FORM FIELDS */}
-
-      {/* ADD-ONS FORM FIELDS */}
-
-      {/* REVIEW VIEW */}
 
       {/* RECEIPT SECTION */}
       {step < vmSteps.length - 1 && (

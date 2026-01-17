@@ -2,8 +2,6 @@ import { Link } from "@tanstack/react-router";
 import {
   Avatar,
   Box,
-  Button,
-  Divider,
   Drawer,
   List,
   ListItem,
@@ -19,7 +17,6 @@ import {
   ConstructionOutlined,
   LanOutlined,
   CheckCircleOutline,
-  SettingsOutlined,
 } from "@mui/icons-material";
 
 const loggedInUser = {
@@ -36,6 +33,11 @@ const navEntries = [
     icon: <DashboardOutlined />,
     name: "Dashboard",
     link: "/",
+  },
+  {
+    icon: <AddOutlined />,
+    name: "New",
+    link: "/new",
   },
   {
     icon: <AppsOutlined />,
@@ -61,45 +63,29 @@ const navEntries = [
     icon: <AttachMoneyOutlined />,
     name: "Billing",
     link: "/billing",
-  },
-  {
-    icon: <SettingsOutlined />,
-    name: "Admin",
-    link: "/admin"
   }
 ];
 
 export default function NavigationDrawer({ children }: { children: any }) {
   return (
-    <Box sx={{ display: "flex", minHeight: "100vh" }}>
+    <Box sx={{ display: "flex", minHeight: '100vh' }}>
       <Drawer
         variant="permanent"
         sx={{
           width: drawerWidth,
           flexShrink: 1,
-          display: { xs: "none", md: "block" },
+          display: { xs: 'none', md: 'block' },
           [`& .MuiDrawer-paper`]: {
-            width: drawerWidth,
-            boxSizing: "border-box",
-            position: "relative",
-            height: "100vh",
-            top: 0,
-          },
+              width: drawerWidth,
+              boxSizing: "border-box",
+              position: 'relative',
+              height: '100vh',
+              top: 0
+            },
         }}
       >
         <Box sx={{ display: "flex", flexDirection: "column", height: "100%" }}>
           <List sx={{ flexGrow: 1 }}>
-            {/* New resource button */}
-            <ListItem sx={{ justifyContent: "center" }}>
-              <Button href="/new" variant="outlined" sx={{ px: 8, mb: 1 }}>
-                <AddOutlined sx={{ mr: 1 }} />
-                New
-              </Button>
-            </ListItem>
-
-            <Divider />
-
-            {/* Navigation tabs */}
             {navEntries.map((entry) => {
               return (
                 <ListItem disablePadding>
