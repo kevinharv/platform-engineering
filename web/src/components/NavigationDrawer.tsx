@@ -18,14 +18,7 @@ import {
   LanOutlined,
   CheckCircleOutline,
 } from "@mui/icons-material";
-
-const loggedInUser = {
-  username: "519233@corp.com",
-  displayName: "John Doe",
-};
-const initials =
-  loggedInUser.displayName.split(" ")[0][0] +
-  loggedInUser.displayName.split(" ")[1][0];
+import { useAuth } from "./AuthContext";
 
 const drawerWidth = 220;
 const navEntries = [
@@ -47,7 +40,7 @@ const navEntries = [
   {
     icon: <LanOutlined />,
     name: "Inventory",
-    link: "/groups",
+    link: "/inventory",
   },
   {
     icon: <CheckCircleOutline />,
@@ -63,32 +56,35 @@ const navEntries = [
     icon: <AttachMoneyOutlined />,
     name: "Billing",
     link: "/billing",
-  }
+  },
 ];
 
 export default function NavigationDrawer({ children }: { children: any }) {
+  const { username, displayName } = useAuth();
+  const initials = displayName.split(" ")[0][0] + displayName.split(" ")[1][0];
+
   return (
-    <Box sx={{ display: "flex", minHeight: '100vh' }}>
+    <Box sx={{ display: "flex", minHeight: "100vh" }}>
       <Drawer
         variant="permanent"
         sx={{
           width: drawerWidth,
           flexShrink: 1,
-          display: { xs: 'none', md: 'block' },
+          display: { xs: "none", md: "block" },
           [`& .MuiDrawer-paper`]: {
-              width: drawerWidth,
-              boxSizing: "border-box",
-              position: 'relative',
-              height: '100vh',
-              top: 0
-            },
+            width: drawerWidth,
+            boxSizing: "border-box",
+            position: "relative",
+            height: "100vh",
+            top: 0,
+          },
         }}
       >
         <Box sx={{ display: "flex", flexDirection: "column", height: "100%" }}>
           <List sx={{ flexGrow: 1 }}>
             {navEntries.map((entry) => {
               return (
-                <ListItem disablePadding>
+                <ListItem key={entry.name} disablePadding>
                   <ListItemButton component={Link} to={entry.link}>
                     {entry.icon}
                     <ListItemText
@@ -103,9 +99,7 @@ export default function NavigationDrawer({ children }: { children: any }) {
           <Box sx={{ p: 2, borderTop: "1px solid #ddd" }}>
             <Box sx={{ display: "flex", alignItems: "center" }}>
               <Avatar sx={{ mr: 1 }}>{initials}</Avatar>
-              <Typography variant="body2">
-                {loggedInUser.displayName}
-              </Typography>
+              <Typography variant="body2">{username}</Typography>
             </Box>
           </Box>
         </Box>
