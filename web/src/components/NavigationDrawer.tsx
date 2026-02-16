@@ -20,7 +20,7 @@ import {
 } from "@mui/icons-material";
 import { useAuth } from "./AuthContext";
 
-const drawerWidth = 220;
+const drawerWidth = 250;
 const navEntries = [
   {
     icon: <DashboardOutlined />,

@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from "./app/__root"
 import { Route as AboutRouteImport } from "./app/about"
 import { Route as IndexRouteImport } from "./app/index"
 import { Route as NewIndexRouteImport } from "./app/new/index"
+import { Route as InventoryIndexRouteImport } from "./app/inventory/index"
 import { Route as NewNamespaceRouteImport } from "./app/new/namespace"
 import { Route as NewVmIndexRouteImport } from "./app/new/vm/index"
 
@@ -30,6 +31,11 @@ const NewIndexRoute = NewIndexRouteImport.update({
   path: "/new/",
   getParentRoute: () => rootRouteImport,
 } as any)
+const InventoryIndexRoute = InventoryIndexRouteImport.update({
+  id: "/inventory/",
+  path: "/inventory/",
+  getParentRoute: () => rootRouteImport,
+} as any)
 const NewNamespaceRoute = NewNamespaceRouteImport.update({
   id: "/new/namespace",
   path: "/new/namespace",
@@ -45,13 +51,15 @@ export interface FileRoutesByFullPath {
   "/": typeof IndexRoute
   "/about": typeof AboutRoute
   "/new/namespace": typeof NewNamespaceRoute
-  "/new": typeof NewIndexRoute
-  "/new/vm": typeof NewVmIndexRoute
+  "/inventory/": typeof InventoryIndexRoute
+  "/new/": typeof NewIndexRoute
+  "/new/vm/": typeof NewVmIndexRoute
 }
 export interface FileRoutesByTo {
   "/": typeof IndexRoute
   "/about": typeof AboutRoute
   "/new/namespace": typeof NewNamespaceRoute
+  "/inventory": typeof InventoryIndexRoute
   "/new": typeof NewIndexRoute
   "/new/vm": typeof NewVmIndexRoute
 }
@@ -60,21 +68,36 @@ export interface FileRoutesById {
   "/": typeof IndexRoute
   "/about": typeof AboutRoute
   "/new/namespace": typeof NewNamespaceRoute
+  "/inventory/": typeof InventoryIndexRoute
   "/new/": typeof NewIndexRoute
   "/new/vm/": typeof NewVmIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: "/" | "/about" | "/new/namespace" | "/new" | "/new/vm"
+  fullPaths:
+    | "/"
+    | "/about"
+    | "/new/namespace"
+    | "/inventory/"
+    | "/new/"
+    | "/new/vm/"
   fileRoutesByTo: FileRoutesByTo
-  to: "/" | "/about" | "/new/namespace" | "/new" | "/new/vm"
-  id: "__root__" | "/" | "/about" | "/new/namespace" | "/new/" | "/new/vm/"
+  to: "/" | "/about" | "/new/namespace" | "/inventory" | "/new" | "/new/vm"
+  id:
+    | "__root__"
+    | "/"
+    | "/about"
+    | "/new/namespace"
+    | "/inventory/"
+    | "/new/"
+    | "/new/vm/"
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   NewNamespaceRoute: typeof NewNamespaceRoute
+  InventoryIndexRoute: typeof InventoryIndexRoute
   NewIndexRoute: typeof NewIndexRoute
   NewVmIndexRoute: typeof NewVmIndexRoute
 }
@@ -98,8 +121,15 @@ declare module "@tanstack/react-router" {
     "/new/": {
       id: "/new/"
       path: "/new"
-      fullPath: "/new"
+      fullPath: "/new/"
       preLoaderRoute: typeof NewIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    "/inventory/": {
+      id: "/inventory/"
+      path: "/inventory"
+      fullPath: "/inventory/"
+      preLoaderRoute: typeof InventoryIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     "/new/namespace": {
@@ -112,7 +142,7 @@ declare module "@tanstack/react-router" {
     "/new/vm/": {
       id: "/new/vm/"
       path: "/new/vm"
-      fullPath: "/new/vm"
+      fullPath: "/new/vm/"
       preLoaderRoute: typeof NewVmIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
@@ -123,6 +153,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   NewNamespaceRoute: NewNamespaceRoute,
+  InventoryIndexRoute: InventoryIndexRoute,
   NewIndexRoute: NewIndexRoute,
   NewVmIndexRoute: NewVmIndexRoute,
 }
